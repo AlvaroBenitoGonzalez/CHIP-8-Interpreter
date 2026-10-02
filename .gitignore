@@ -10,6 +10,5 @@ result
 *.swp
 .DS_Store
 
-*.txt
 *.nix
 *.ch8

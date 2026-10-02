@@ -17,21 +17,34 @@ The emulator core (`chip8.c` / `chip8.h`) has no SDL dependency, so it can be re
 
 ## Requirements
 
-- A C99 compiler (GCC or Clang)
-- [SDL3](https://github.com/libsdl-org/SDL)
+- A C11 compiler (GCC, Clang, or MSVC)
+- [CMake](https://cmake.org/) 3.16 or newer
+- [SDL3](https://github.com/libsdl-org/SDL) (found via CMake's `find_package`)
 
 ## Building
 
-There is no build system yet, so compile directly. With `pkg-config`:
+The project builds with CMake. It defaults to a Release build if you don't pick a build type.
 
 ```sh
-gcc -std=c99 -O2 -Wall -Wextra main.c chip8.c -o chip8 $(pkg-config --cflags --libs sdl3)
+cmake -S . -B build
+cmake --build build
 ```
 
-Or, if SDL3 is installed in a standard location:
+The executable is written to `build/chip8` (or `build/Debug/chip8.exe` / `build/Release/chip8.exe` with multi-config generators such as Visual Studio).
+
+If CMake can't find SDL3, point it at your install:
 
 ```sh
-gcc -std=c99 -O2 main.c chip8.c -o chip8 -lSDL3
+cmake -S . -B build -DCMAKE_PREFIX_PATH=/path/to/SDL3
+# or
+cmake -S . -B build -DSDL3_DIR=/path/to/SDL3/lib/cmake/SDL3
+```
+
+For a debug build:
+
+```sh
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
+cmake --build build
 ```
 
 ## Usage
