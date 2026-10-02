@@ -1,0 +1,15 @@
+build/
+
+chip8
+
+result
+.direnv/
+
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+*.txt
+*.nix
+*.ch8
